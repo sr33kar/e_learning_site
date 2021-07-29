@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>eLearning Portal</title>
+    <link th:href="@{style.css}" rel="stylesheet" />
+</head>
+<body>
+<h3 style="display: inline">Welcome! <p th:text="${user.name}" ></p></h3>
+<span style="float: right"><img style="border-radius: 50%; background-color: grey" width="50px" id="profile_pic" th:src="${user.profilePic}"  alt=""><h4>UserID: <p th:text="${user.userId}" ></p></h4><a href="/">Logout</a></span>
+<br><br><br><br><br><br><br><br><br><br>
+<h4>Check out the courses:</h4>
+<table id="table" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Course ID</th>
+                    <th>Resource</th>
+                    <th>Description</th>
+                    <th>Course Fee</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course : ${courseList}">
+                    <td th:text="${course.courseName}">Name</td>
+                    <td th:text="${course.courseId}">Position</td>
+                    <td th:text="${course.courseResource}">Office</td>
+                    <td th:text="${course.courseDescription}">Start date</td>
+                    <td th:text="${course.courseFee}">Salary</td>
+                </tr>
+                </tbody>
+            </table>
+            
+<h3>Feedback</h3>
+        
+        <form action="#" th:action="@{/feedback}" th:object="${feedback}" modelAttribute="feedbackData" method='POST' enctype='multipart/form-data'>
+            <div id='input'>
+                <span>Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='userID' th:field="*{name}" placeholder='Enter a nameD' required></input>
+            </div><br>
+            <div id='input'>
+                <span>User ID</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{userId}" name='name' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{email}" name='email' required></input>
+            </div><br>
+            
+            <div id='input'>
+                <span>Feedback</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea name='address' th:field="*{feedbackText}" rows='4' required></textarea>
+            </div><br>
+            
+            
+            <button type='submit'>Submit</button>
+                    
+        </form>
+        
+<h3>Contact</h3>
+        
+        <form action="#" th:action="@{/contact}" th:object="${contact}" modelAttribute="contactData" method='POST' enctype='multipart/form-data'>
+            <div id='input'>
+                <span>User ID</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='userID' th:field="*{userId}" placeholder='Enter a User ID' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{name}" name='name' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{email}" name='email' required></input>
+            </div><br>
+            
+            <div id='input'>
+                <span>Phone</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{phoneNum}" name='email' required></input>
+            </div><br>
+            
+            <div id='input'>
+                <span>Message</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea name='address' th:field="*{message}" rows='4' required></textarea>
+            </div><br>
+            
+            
+            <button type='submit'>Submit</button>
+                    
+        </form>
+</body>
+</html>
+<style>
+#table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#table td, #table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+
+#table tr:hover {background-color: #ddd;}
+
+#table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+input, textarea{
+    width:200px;
+}
+span{}
+#input{
+    right:0%;
+}
+
+</style>
