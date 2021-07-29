@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>eLearning Portal</title>
+    <link th:href="@{style.css}" rel="stylesheet" />
+</head>
+<body>
+    <div id='body'>
+        <h3>Register</h3>
+        <div th:if="${existedUsername != null}" class="alert alert-danger notification" role="alert"  style="background-color: red;">
+   			<p th:text="${existedUsername}" style="display: inline;"></p><p  style="display: inline;"> already exists</p>
+		</div>
+        <form action="#" th:action="@{/registered}" th:object="${user}" modelAttribute="userData" method='POST' enctype='multipart/form-data'>
+            <div id='input'>
+                <span>User ID</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='userID' th:field="*{userId}" placeholder='Enter a user ID' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{name}" name='name' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{email}" name='email' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Password</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='password' th:field="*{password}" name='password' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Phone Number</span><input type='text' th:field="*{phoneNum}" name='phone' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Address</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea name='address' th:field="*{address}" rows='4' required></textarea>
+            </div><br>
+            <div id='input'>
+                <span>Upload Photo</span><input type='text' th:field="*{profilePic}" name='fileToUpload' required></input>
+            </div><br>
+            <button type='submit'>Register</button>
+                    
+        </form>
+
+        <h3>Log IN</h3>
+        <div th:if="${error != null}" class="alert alert-danger notification" role="alert"  style="background-color: red;">
+   			<p th:text="${error}" style="display: inline;"></p><p  style="display: inline;"> Invalid UserID or Password</p>
+		</div>
+        <form action="#" th:action="@{/loggedIn}" th:object="${user}" modelAttribute="userData" method='POST'>
+            <div id='input'>
+                <span>User ID</span>&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{userId}" name='userId'></input>
+            </div><br>
+            <div id='input'>
+                <span>Password</span><input type='password' th:field="*{password}" name='password'></input>
+            </div><br>
+            <button type='submit'>Login</button>
+        </form>
+    </div>
+    
+<a href='admin'>Are you an admin??</a>
+</body>
+<style>
+input, textarea{
+    width:200px;
+}
+span{}
+#input{
+    right:0%;
+}
+body{
+    width:500px;
+    margin-left:30%;
+    
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+</style>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>eLearning Portal</title>
+    <link th:href="@{style.css}" rel="stylesheet" />
+</head>
+<body>
+    <div id='body'>
+        <h3>Log IN</h3>
+        <div th:if="${error != null}" class="alert alert-danger notification" role="alert"  style="background-color: red;">
+   			<p th:text="${error}" style="display: inline;"></p><p  style="display: inline;"> Invalid UserID or Password</p>
+		</div>
+        <form action="#" th:action="@{/adminLogin}" th:object="${admin}" modelAttribute="adminData" method='POST'>
+            <div id='input'>
+                <span>Admin ID</span>&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{adminId}" name='userId'></input>
+            </div><br>
+            <div id='input'>
+                <span>Password</span><input type='password' th:field="*{password}" name='password'></input>
+            </div><br>
+            <button type='submit'>Login</button>
+        </form>
+    </div>
+    
+<a href='/'>Are you an user??</a>
+</body>
+<style>
+input, textarea{
+    width:200px;
+}
+span{}
+#input{
+    right:0%;
+}
+body{
+    width:500px;
+    margin-left:30%;
+    
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+</style>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>eLearning Portal</title>
+    <link th:href="@{style.css}" rel="stylesheet" />
+</head>
+<body>
+<h3 style="display: inline">Welcome! <p th:text="${admin.name}" ></p></h3>
+<span style="float: right"><h4>AdminID: <p th:text="${admin.adminId}" ></p></h4><a href="/admin">Logout</a></span>
+<br><br><br><br><br><br><br><br><br><br>
+<h4>Check out the courses:</h4>
+<table id="table" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Course ID</th>
+                    <th>Resource</th>
+                    <th>Description</th>
+                    <th>Course Fee</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course : ${courseList}">
+                    <td th:text="${course.courseName}">Name</td>
+                    <td th:text="${course.courseId}">Position</td>
+                    <td th:text="${course.courseResource}">Office</td>
+                    <td th:text="${course.courseDescription}">Start date</td>
+                    <td th:text="${course.courseFee}">Salary</td>
+                </tr>
+                </tbody>
+            </table>
+<h4>Check out the Users:</h4>
+<table id="table" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Reg Date</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${userList}">
+                    <td th:text="${user.userId}">Name</td>
+                    <td th:text="${user.name}">Position</td>
+                    <td th:text="${user.regDate}">Office</td>
+                    <td th:text="${user.address}">Start date</td>
+                    <td th:text="${user.phoneNum}">Salary</td>
+                    <td th:text="${user.email}">Salary</td>
+                </tr>
+                </tbody>
+            </table>
+<h4>Check out the Feedbacks:</h4>
+<table id="table" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Feedback ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Feedback</th>
+                    <th>User ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="feedback : ${feedbackList}">
+                    <td th:text="${feedback.feedbackId}">Name</td>
+                    <td th:text="${feedback.name}">Position</td>
+                    <td th:text="${feedback.email}">Office</td>
+                    <td th:text="${feedback.feedbackText}">Start date</td>
+                    <td th:text="${feedback.userId}">Salary</td>
+                </tr>
+                </tbody>
+            </table>
+            
+<h4>Check out the Contacts:</h4>
+<table id="table" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Contact ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Phone</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="contact : ${contactList}">
+                    <td th:text="${contact.userId}">Name</td>
+                    <td th:text="${contact.name}">Position</td>
+                    <td th:text="${contact.email}">Office</td>
+                    <td th:text="${contact.message}">Start date</td>
+                    <td th:text="${contact.phoneNum}">Salary</td>
+                </tr>
+                </tbody>
+            </table>
+          
+<h3>Add a Course</h3>
+        <div th:if="${error != null}" class="alert alert-danger notification" role="alert"  style="background-color: red;">
+   			<p th:text="${error}" style="display: inline;"></p>
+		</div>
+        <form action="#" th:action="@{/addCourse}" th:object="${course}" modelAttribute="courseData" method='POST' enctype='multipart/form-data'>
+            <div id='input'>
+                <span>Course Name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='userID' th:field="*{courseName}" placeholder='Enter a user ID' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Course ID</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{courseId}" name='name' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Resource</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' th:field="*{courseResource}" name='email' required></input>
+            </div><br>
+            <div id='input'>
+                <span>Description</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea name='address' th:field="*{courseDescription}" rows='4' required></textarea>
+            </div><br>
+            
+            <div id='input'>
+                <span>Course Fee</span><input type='number' th:field="*{courseFee}" name='phone' required></input>
+            </div><br>
+            
+            <button type='submit'>Submit</button>
+                    
+        </form>
+
+</body>
+</html>
+<style>
+#table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#table td, #table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+
+#table tr:hover {background-color: #ddd;}
+
+#table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+input, textarea{
+    width:200px;
+}
+span{}
+#input{
+    right:0%;
+}
+
+</style>
